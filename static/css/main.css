@@ -1,0 +1,56 @@
+/* GENERAL */
+html {
+    height: 100%;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.text{
+    margin: 1% 2% 1% 2%;
+    font-size: 1.3em;
+}
+
+/* NAVIGATION */
+.navbar-collapse .nav-item {
+    text-align: center;
+}
+
+.navbar .navbar-brand {
+    position: absolute;
+    left: calc(50% - 65px);
+    top: 10px;
+    font-size: 1.5em;
+}
+
+#navbarNavDropdown {
+    justify-content: end;
+}
+
+/* DRAG AND DROP AREA */
+
+.box {
+    display: flex;
+    background-color: #c8dadf;
+    outline: 2px dashed black;
+    outline-offset: -10px;
+    flex-grow: 1;
+}
+
+.box__input {
+    margin: auto;
+    text-align: center;
+}
+
+.box.is-dragover {
+    background-color: grey;
+}
+
+.box.is-uploading .box__input {
+    visibility: none;
+  }
+.box.is-uploading .box__uploading {
+display: block;
+}
