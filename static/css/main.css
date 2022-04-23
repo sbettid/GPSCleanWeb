@@ -9,11 +9,16 @@ body {
 }
 
 .text{
-    margin: 1% 2% 1% 2%;
+    margin: 3% 2% 3% 2%;
     font-size: 1.3em;
 }
 
 /* NAVIGATION */
+.navbar {
+    min-height: 10%;
+    background-color: white !important;
+}
+
 .navbar-collapse .nav-item {
     text-align: center;
 }
@@ -21,7 +26,7 @@ body {
 .navbar .navbar-brand {
     position: absolute;
     left: calc(50% - 65px);
-    top: 10px;
+    top: calc(50% - 19px);
     font-size: 1.5em;
 }
 
@@ -37,6 +42,7 @@ body {
     outline: 2px dashed black;
     outline-offset: -10px;
     flex-grow: 1;
+    margin: 0 2% 2% 2%;
 }
 
 .box__input {
@@ -45,7 +51,7 @@ body {
 }
 
 .box.is-dragover {
-    background-color: grey;
+    background-color: #c8cfdf;
 }
 
 .box.is-uploading .box__input {
