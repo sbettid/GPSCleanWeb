@@ -10,15 +10,18 @@ body {
 
 .text{
     margin: 3% 2% 3% 2%;
-    font-size: 1.3em;
+    font-size: 1.1em;
 }
 
 /* NAVIGATION */
 .navbar {
-    min-height: 10%;
+    min-height: 80px;
     background-color: white !important;
 }
 
+.navbar-collapse.show, .navbar-collapse.collapsing {
+    margin-top: 10px;
+}
 .navbar-collapse .nav-item {
     text-align: center;
 }
@@ -26,7 +29,7 @@ body {
 .navbar .navbar-brand {
     position: absolute;
     left: calc(50% - 65px);
-    top: calc(50% - 19px);
+    top: calc(40px - 19px);
     font-size: 1.5em;
 }
 

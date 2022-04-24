@@ -12,13 +12,14 @@
         {% include 'navigation/nav.html' %}
 
         <p class="text">
-            Upload or drag and drop a GPX trace to correct it using our machine learning techniques. 
+            Upload or drag and drop a GPX trace to correct it using our machine learning techniques and visualize the
+            result in the built-in map or download the corrected GPX.
         </p>
 
         <form class="box" method="post" action="" enctype="multipart/form-data">
             <div class="box__input">
               <input class="box__file" type="file" name="file" accept=".gpx" id="file" style="display: none;"/>
-              <label for="file"><strong>Choose a file</strong><span class="box__dragndrop"> or drag it here</span>.</label>
+              <strong>Choose a file</strong><span class="box__dragndrop"> or drag it here</span>.
             </div>
         </form>
 

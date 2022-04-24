@@ -1,6 +1,18 @@
 // Set form 
 var $form = $('.box');
 
+// stop propagation
+$('.box__file').on('click', function(e) {
+    e.stopPropagation();
+});
+
+// attach click event on the whole area to triggere upload file dialog
+$form.on('click', function(e) {
+    $('.box__file').trigger('click');
+});
+
+
+
 var droppedFiles = null;
 // prevent default behaviour on drag and drop events
 $form.on('drag dragstart dragend dragover dragenter dragleave drop', function(e) {
@@ -33,6 +45,16 @@ $form.on('drag dragstart dragend dragover dragenter dragleave drop', function(e)
         return;
     }
 
-    //
+    //Load page with POST data
+    let formData = new FormData()
+
+    formData.append('trace', trace)
+
+    fetch("/correct_trace", {
+    method: "POST",
+    body: formData
+    }).then(res => {
+        console.log("Request complete! response:", res);
+    });
 
 });
