@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for
 import os
 import sys
 import uuid
@@ -34,7 +34,7 @@ def correct_trace():
     # get file name
     filename = traceFileObject.filename
     # sanitize it
-    safeFileName =secure_filename(filename)
+    safeFileName = secure_filename(filename)
 
     # temporary output path
     temporaryTracePath = os.path.join(app.config['uploadFolder'], userUUID + "_" + safeFileName)
@@ -46,5 +46,18 @@ def correct_trace():
     sys.argv = ["gpsclean", temporaryTracePath]
     gpsclean.main()
 
-    return ""
+    # get corrected trace as string
+    correctedFilePath = os.path.splitext(temporaryTracePath)[0] + "_cleaned.gpx"
+    correctedFile = open(correctedFilePath, "r")
+
+    correctedTrace = correctedFile.read()
+
+    correctedFile.close()
+
+    return redirect(url_for("show_correct_trace", data=correctedTrace, code=307))
     
+@app.route("/show_corrected_trace", methods=['GET'])
+def show_correct_trace(corrected_trace):
+    messages = request.form.get('data')
+    print(messages)
+    return render_template('correct_trace.html', corrected_trace=corrected_trace)

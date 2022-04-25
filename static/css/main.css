@@ -63,3 +63,6 @@ body {
 .box.is-uploading .box__uploading {
 display: block;
 }
+
+/* VISUALIZE CORRECTED TRACE */
+#map { height: 180px; }
