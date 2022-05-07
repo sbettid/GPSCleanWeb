@@ -11,6 +11,7 @@ $form.on('click', function(e) {
     $('.box__file').trigger('click');
 });
 
+var fileInput = $('.box #file');
 
 
 var droppedFiles = null;
@@ -46,15 +47,13 @@ $form.on('drag dragstart dragend dragover dragenter dragleave drop', function(e)
     }
 
     //Load page with POST data
-    let formData = new FormData()
+    let formData = new FormData();
 
-    formData.append('trace', trace)
+    formData.append('trace', trace);
 
-    fetch("/correct_trace", {
-    method: "POST",
-    body: formData
-    }).then(res => {
-        console.log("Request complete! response:", res);
-    });
+    fileInput.files = e.originalEvent.dataTransfer.files;
 
+    console.log(fileInput.files);
+
+    $form.submit();
 });

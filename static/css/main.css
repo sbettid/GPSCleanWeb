@@ -65,4 +65,4 @@ display: block;
 }
 
 /* VISUALIZE CORRECTED TRACE */
-#map { height: 180px; }
+#map { height: 180px; flex-grow: 1;}

@@ -25,10 +25,10 @@ def correct_trace():
     # get trace file, if any
     traceFileObject = request.files.get('trace')
     
-    # if trace file is None, go to main page
     if not traceFileObject: 
         return render_template('main.html')
     
+    """ 
     # generate random UUID
     userUUID = str(uuid.uuid4())
     # get file name
@@ -52,12 +52,7 @@ def correct_trace():
 
     correctedTrace = correctedFile.read()
 
-    correctedFile.close()
-
-    return redirect(url_for("show_correct_trace", data=correctedTrace, code=307))
+    correctedFile.close() """
     
-@app.route("/show_corrected_trace", methods=['GET'])
-def show_correct_trace(corrected_trace):
-    messages = request.form.get('data')
-    print(messages)
-    return render_template('correct_trace.html', corrected_trace=corrected_trace)
+    return render_template('correct_trace.html')
+    
