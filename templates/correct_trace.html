@@ -12,6 +12,14 @@
         <!-- Navbar -->
         {% include 'navigation/nav.html' %}
 
+        <div class="downloadBar">
+            The corrected trace is displayed in the following map and is available for download. 
+            Please consult the About page for more information on the applied correcting tecniques. 
+            <div class="downloadContainer">
+                <button type="button" id="downloadCorrectedTrace" class="btn btn-success">Download corrected trace</button>
+            </div>
+        </div>
+
         <div id="map"></div>
         
 
@@ -19,9 +27,12 @@
         <script src="{{ url_for('static',filename='bootstrap-5.1.3-dist/js/bootstrap.bundle.js') }}"></script>
         <script src="{{ url_for('static',filename='leaflet/leaflet.js') }}"></script>
         <script src="{{ url_for('static',filename='leaflet-omnivore/leaflet-omnivore.min.js') }}"></script>
+        <script src="{{ url_for('static',filename='js/FileSaver.js') }}"></script>
         <script src="{{ url_for('static',filename='js/visualize_corrected_trace.js') }}"></script>
         <script>
-            //visualize_corrected_trace({{ corrected_trace }});
+            var correctedTrace = '{{ corrected_trace }}';
+            console.log(correctedTrace);
+            visualize_corrected_trace(correctedTrace);
         </script>
     </body>
 </html>

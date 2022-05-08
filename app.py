@@ -24,11 +24,11 @@ def correct_trace():
     
     # get trace file, if any
     traceFileObject = request.files.get('trace')
-    
-    if not traceFileObject: 
+
+    if traceFileObject is None: 
         return render_template('main.html')
     
-    """ 
+     
     # generate random UUID
     userUUID = str(uuid.uuid4())
     # get file name
@@ -52,7 +52,11 @@ def correct_trace():
 
     correctedTrace = correctedFile.read()
 
-    correctedFile.close() """
-    
-    return render_template('correct_trace.html')
+    correctedFile.close()
+
+    # clean files, we do not want left-overs
+    os.remove(correctedFilePath)
+    os.remove(temporaryTracePath) 
+    print(correctedTrace)
+    return render_template('correct_trace.html', corrected_trace=correctedTrace)
     
