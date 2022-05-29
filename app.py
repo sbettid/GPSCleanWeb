@@ -50,13 +50,15 @@ def correct_trace():
     correctedFilePath = os.path.splitext(temporaryTracePath)[0] + "_cleaned.gpx"
     correctedFile = open(correctedFilePath, "r")
 
-    correctedTrace = correctedFile.read()
+    correctedTraceMultiLine = correctedFile.read()
 
     correctedFile.close()
 
     # clean files, we do not want left-overs
     os.remove(correctedFilePath)
-    os.remove(temporaryTracePath) 
+    os.remove(temporaryTracePath)
+    correctedTrace = correctedTraceMultiLine.replace('\n', ' ')
+    
     print(correctedTrace)
     return render_template('correct_trace.html', corrected_trace=correctedTrace)
     

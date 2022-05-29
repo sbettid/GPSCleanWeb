@@ -8,11 +8,13 @@ L.tileLayer('https://{s}.tile-cyclosm.openstreetmap.fr/cyclosm/{z}/{x}/{y}.png',
 
 
 function visualize_corrected_trace(correctedTrace) {
-    //omnivore.gpx.parse(correctedTrace).addTo(mymap);
-    console.log(correctedTrace);
-}
+    $('#downloadCorrectedTrace').on('click', function(){
+        var blob = new Blob([correctedTrace], {type: "text/plain;charset=utf-8"});
+        saveAs(blob, "correctedTrace.gpx");
+    });
 
-$('#downloadCorrectedTrace').on('click', function(){
-    var blob = new Blob(["Hello, world!"], {type: "text/plain;charset=utf-8"});
-    saveAs(blob, "hello world.txt");
-});
+
+    var traceLayer = omnivore.gpx.parse(correctedTrace);
+    traceLayer.addTo(mymap);
+    mymap.fitBounds(traceLayer.getBounds());
+}

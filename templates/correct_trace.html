@@ -9,9 +9,10 @@
         <title>GPSClean</title>
     </head>
     <body>
+        
         <!-- Navbar -->
         {% include 'navigation/nav.html' %}
-
+        
         <div class="downloadBar">
             The corrected trace is displayed in the following map and is available for download. 
             Please consult the About page for more information on the applied correcting tecniques. 
@@ -28,10 +29,9 @@
         <script src="{{ url_for('static',filename='leaflet/leaflet.js') }}"></script>
         <script src="{{ url_for('static',filename='leaflet-omnivore/leaflet-omnivore.min.js') }}"></script>
         <script src="{{ url_for('static',filename='js/FileSaver.js') }}"></script>
-        <script src="{{ url_for('static',filename='js/visualize_corrected_trace.js') }}"></script>
+         <script src="{{ url_for('static',filename='js/visualize_corrected_trace.js') }}"></script> 
         <script>
-            var correctedTrace = '{{ corrected_trace }}';
-            console.log(correctedTrace);
+            var correctedTrace = '{{ corrected_trace | safe }}';
             visualize_corrected_trace(correctedTrace);
         </script>
     </body>
