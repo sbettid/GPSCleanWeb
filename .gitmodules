@@ -1,0 +1,4 @@
+[submodule "gpsclean_repo"]
+	path = gpsclean_repo
+	url = https://github.com/sbettid/GPSClean.git
+    branch = master

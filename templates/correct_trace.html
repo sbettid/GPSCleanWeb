@@ -32,7 +32,8 @@
          <script src="{{ url_for('static',filename='js/visualize_corrected_trace.js') }}"></script> 
         <script>
             var correctedTrace = '{{ corrected_trace | safe }}';
-            visualize_corrected_trace(correctedTrace);
+            var originalTrace = '{{ original_trace | safe }}';
+            visualize_corrected_trace(correctedTrace, originalTrace);
         </script>
     </body>
 </html>

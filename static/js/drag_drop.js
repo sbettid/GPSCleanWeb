@@ -11,8 +11,11 @@ $form.on('click', function(e) {
     $('.box__file').trigger('click');
 });
 
-var fileInput = $('.box #file');
+function submit_form() {
+    $form.submit();
+}
 
+var fileInput = $('.box #file');
 
 var droppedFiles = null;
 // prevent default behaviour on drag and drop events
@@ -27,8 +30,13 @@ $form.on('drag dragstart dragend dragover dragenter dragleave drop', function(e)
     $form.removeClass('is-dragover'); //and remove it when leaving the area
 })
 .on('drop', function(e) { //on drop...
+
+    console.log("Pippo")
+
     //Get files list
     droppedFiles = e.originalEvent.dataTransfer.files;
+
+    console.log(JSON.stringify(droppedFiles))
     
     //Dropped file lis length
     const droppedFilesLength = droppedFiles.length;
@@ -46,14 +54,9 @@ $form.on('drag dragstart dragend dragover dragenter dragleave drop', function(e)
         return;
     }
 
-    //Load page with POST data
-    let formData = new FormData();
+    fileInput.value = droppedFiles;
 
-    formData.append('trace', trace);
+    console.log(fileInput);
 
-    fileInput.files = e.originalEvent.dataTransfer.files;
-
-    console.log(fileInput.files);
-
-    $form.submit();
+    //$form.submit();
 });
