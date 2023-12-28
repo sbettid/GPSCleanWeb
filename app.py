@@ -1,11 +1,8 @@
-from flask import Flask, render_template, request, redirect, url_for
-import os
-import sys
-import uuid
-import re
+from flask import Flask, render_template, request
 from werkzeug.utils import secure_filename
 from gpsclean.main import main as gpsclean_main
 import tempfile
+import os
 
 __name__ = 'GPSClean'
 
@@ -17,67 +14,74 @@ def render_main():
     
     return render_template('main.html')
 
+@app.route("/correct_example_trace", methods=['GET'])
+def correct_example_trace():
+    with open("./test_traces/test_trace_cleaned.gpx", "r") as data:
+
+        corrected_trace = data.read()
+
+    with open("./test_traces/test_trace.gpx", "r") as data:
+
+        original_trace = data.read()
+
+    # clean files, we do not want left-overs
+    #temp_dir.cleanup()
+
+    corrected_trace = corrected_trace.replace('\n', ' ')
+    original_trace = original_trace.replace('\n', ' ')
+    
+    return render_template('correct_trace.html', corrected_trace=corrected_trace, original_trace=original_trace, original_trace_name="test_trace")
+    
+
 # correct trace page
 @app.route("/correct_trace", methods=['POST'])
 def correct_trace():
     
     # get trace file, if any
-    traceFileObject = request.files.get('trace')
+    trace_file = request.files.get('trace')
 
-    if traceFileObject is None: 
+    if trace_file is None: 
         return render_template('main.html')
     
     # create temporary directory
     temp_dir = tempfile.TemporaryDirectory()
      
-     
-    # generate random UUID
-    userUUID = str(uuid.uuid4())
-
-    # generate random UUID
-    userUUID = str(uuid.uuid4())
     # get file name
-    filename = traceFileObject.filename
+    filename = trace_file.filename
 
     if filename == "":
         filename = "trace"
 
-    print(f"FIle {traceFileObject}")
-
-    print(f"Original filename {filename}")
-
     # sanitize it
-    safeFileName = secure_filename(filename)
-
-    print(f"Sanitized filename {safeFileName}")
+    safe_filename = secure_filename(filename)
 
     # temporary output path
-    temporaryTracePath = os.path.join(temp_dir.name, safeFileName)
+    original_trace_filepath = os.path.join(temp_dir.name, safe_filename)
 
     # save trace file to temporary folder, using uuid + filename
-    traceFileObject.save(temporaryTracePath)
+    trace_file.save(original_trace_filepath)
 
-    print(f"File saved in {temporaryTracePath}")
+    print(f"File saved in {original_trace_filepath}")
 
     # correct the trace using GPSClean package
-    gpsclean_main([temporaryTracePath])
+    gpsclean_main([original_trace_filepath])
 
     # get corrected trace as string
-    correctedFilePath = os.path.splitext(temporaryTracePath)[0] + "_cleaned.gpx"
+    corrected_trace_path = os.path.splitext(original_trace_filepath)[0] + "_cleaned.gpx"
     
-    with open(correctedFilePath, "r") as data:
+    with open(corrected_trace_path, "r") as data:
 
-        correctedTraceMultiLine = data.read()
+        corrected_trace = data.read()
 
-    with open(temporaryTracePath, "r") as data:
+    with open(original_trace_filepath, "r") as data:
 
         original_trace = data.read()
 
     # clean files, we do not want left-overs
-    temp_dir.cleanup()
-    correctedTrace = correctedTraceMultiLine.replace('\n', ' ')
+    #temp_dir.cleanup()
+
+    corrected_trace = corrected_trace.replace('\n', ' ')
     original_trace = original_trace.replace('\n', ' ')
     
-    # print(correctedTrace)
-    return render_template('correct_trace.html', corrected_trace=correctedTrace, original_trace=original_trace)
+    return render_template('correct_trace.html', corrected_trace=corrected_trace, original_trace=original_trace, original_trace_name=os.path.splitext(original_trace_filepath)[0])
     

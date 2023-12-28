@@ -10,12 +10,13 @@ $('.box__file').on('click', function(e) {
 $form.on('click', function(e) {
     $('.box__file').trigger('click');
 });
+var fileInput = $('.box #file');
 
 function submit_form() {
     $form.submit();
 }
 
-var fileInput = $('.box #file');
+
 
 var droppedFiles = null;
 // prevent default behaviour on drag and drop events
@@ -54,9 +55,9 @@ $form.on('drag dragstart dragend dragover dragenter dragleave drop', function(e)
         return;
     }
 
-    fileInput.value = droppedFiles;
+    fileInput.files = droppedFiles;
 
     console.log(fileInput);
 
-    //$form.submit();
+    $form.submit();
 });

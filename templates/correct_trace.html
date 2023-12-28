@@ -33,7 +33,8 @@
         <script>
             var correctedTrace = '{{ corrected_trace | safe }}';
             var originalTrace = '{{ original_trace | safe }}';
-            visualize_corrected_trace(correctedTrace, originalTrace);
+            var originalTraceName = '{{ original_trace_name }}';
+            visualize_corrected_trace(correctedTrace, originalTrace, originalTraceName);
         </script>
     </body>
 </html>
