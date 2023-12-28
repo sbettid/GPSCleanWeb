@@ -23,7 +23,7 @@ var baseMaps = {
     "CyclOSM": base_layer
 };
 
-function visualize_corrected_trace(correctedTrace, original_trace, original_trace_name) {
+function visualize_corrected_trace(correctedTrace, original_trace, original_trace_name, is_it_a_test_trace) {
     $('#downloadCorrectedTrace').on('click', function(){
         var blob = new Blob([correctedTrace], {type: "text/plain;charset=utf-8"});
         saveAs(blob, original_trace_name + "_cleaned.gpx");
@@ -40,7 +40,11 @@ function visualize_corrected_trace(correctedTrace, original_trace, original_trac
         "Corrected Trace": traceLayer
     };
 
-    var layerControl = L.control.layers(null, overlayMaps).addTo(mymap);
+    var layerControl = L.control.layers(null, overlayMaps, {collapsed:false}).addTo(mymap);
 
-    mymap.fitBounds(traceLayer.getBounds());
+    if (is_it_a_test_trace == "True") {
+        mymap.setView([46.4227999,11.623455], 17);
+    } else {
+        mymap.fitBounds(traceLayer.getBounds());
+    }
 }

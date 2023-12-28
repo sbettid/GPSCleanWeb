@@ -57,7 +57,7 @@ $form.on('drag dragstart dragend dragover dragenter dragleave drop', function(e)
 
     fileInput.files = droppedFiles;
 
-    console.log(fileInput);
+    console.log(trace['name']);
 
     $form.submit();
 });

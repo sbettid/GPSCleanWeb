@@ -5,6 +5,7 @@ import tempfile
 import os
 
 __name__ = 'GPSClean'
+TEST_TRACES_PATH = "./test_traces"
 
 app = Flask(__name__)
 
@@ -16,21 +17,16 @@ def render_main():
 
 @app.route("/correct_example_trace", methods=['GET'])
 def correct_example_trace():
-    with open("./test_traces/test_trace_cleaned.gpx", "r") as data:
-
+    with open(f"{TEST_TRACES_PATH}/test_trace_cleaned.gpx", "r") as data:
         corrected_trace = data.read()
 
-    with open("./test_traces/test_trace.gpx", "r") as data:
-
+    with open(f"{TEST_TRACES_PATH}/test_trace.gpx", "r") as data:
         original_trace = data.read()
-
-    # clean files, we do not want left-overs
-    #temp_dir.cleanup()
 
     corrected_trace = corrected_trace.replace('\n', ' ')
     original_trace = original_trace.replace('\n', ' ')
     
-    return render_template('correct_trace.html', corrected_trace=corrected_trace, original_trace=original_trace, original_trace_name="test_trace")
+    return render_template('correct_trace.html', corrected_trace=corrected_trace, original_trace=original_trace, original_trace_name="test_trace", test_trace=True)
     
 
 # correct trace page
@@ -78,10 +74,12 @@ def correct_trace():
         original_trace = data.read()
 
     # clean files, we do not want left-overs
-    #temp_dir.cleanup()
+    temp_dir.cleanup()
 
     corrected_trace = corrected_trace.replace('\n', ' ')
     original_trace = original_trace.replace('\n', ' ')
     
-    return render_template('correct_trace.html', corrected_trace=corrected_trace, original_trace=original_trace, original_trace_name=os.path.splitext(original_trace_filepath)[0])
+    original_trace_name = os.path.splitext(original_trace_filepath)[0].rsplit("/", 1)[-1]
+
+    return render_template('correct_trace.html', corrected_trace=corrected_trace, original_trace=original_trace, original_trace_name=original_trace_name, test_trace=False)
     

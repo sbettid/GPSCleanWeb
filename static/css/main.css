@@ -17,6 +17,21 @@ body {
 .navbar {
     min-height: 80px;
     background-color: white !important;
+
+    .nav-brand-link, .nav-brand-link:visited, .nav-brand-link:hover, .nav-brand-link:active {
+        color: #3483eb;
+        text-decoration: none;
+
+    }
+
+    .nav-link {
+        color: #3483eb !important;
+        
+    }
+
+    .nav-link.active {
+        color: #da9800 !important;
+    }
 }
 
 .navbar-collapse.show, .navbar-collapse.collapsing {
@@ -41,7 +56,7 @@ body {
 
 .box {
     display: flex;
-    background-color: #c8dadf;
+    background-color: #a2c6f6;
     outline: 2px dashed black;
     outline-offset: -10px;
     flex-grow: 1;
@@ -74,4 +89,14 @@ display: block;
 .downloadContainer {
     margin-top: 20px;
     text-align: center;
+
+    button {
+        background-color: #3483eb;
+        color: white;
+
+        &:hover {
+            color: white;
+            background-color: #135ec1;
+        }
+    }
 }

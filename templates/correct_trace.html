@@ -17,7 +17,7 @@
             The corrected trace is displayed in the following map and is available for download. 
             Please consult the About page for more information on the applied correcting tecniques. 
             <div class="downloadContainer">
-                <button type="button" id="downloadCorrectedTrace" class="btn btn-success">Download corrected trace</button>
+                <button type="button" id="downloadCorrectedTrace" class="btn">Download corrected trace</button>
             </div>
         </div>
 
@@ -31,10 +31,11 @@
         <script src="{{ url_for('static',filename='js/FileSaver.js') }}"></script>
          <script src="{{ url_for('static',filename='js/visualize_corrected_trace.js') }}"></script> 
         <script>
-            var correctedTrace = '{{ corrected_trace | safe }}';
-            var originalTrace = '{{ original_trace | safe }}';
-            var originalTraceName = '{{ original_trace_name }}';
-            visualize_corrected_trace(correctedTrace, originalTrace, originalTraceName);
+            var corrected_trace = '{{ corrected_trace | safe }}';
+            var original_trace = '{{ original_trace | safe }}';
+            var original_trace_name = '{{ original_trace_name }}';
+            var is_it_a_test_trace = '{{ test_trace }}';
+            visualize_corrected_trace(corrected_trace, original_trace, original_trace_name, is_it_a_test_trace);
         </script>
     </body>
 </html>
