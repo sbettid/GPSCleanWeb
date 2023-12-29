@@ -8,3 +8,4 @@ scipy==1.10.0
 tflite_runtime==2.5.0.post1
 flask
 Werkzeug==2.1.2
+gunicorn
