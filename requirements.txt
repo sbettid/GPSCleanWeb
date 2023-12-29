@@ -6,6 +6,6 @@ numpy==1.22.0
 pyproj==3.1.0
 scipy==1.10.0
 tflite_runtime==2.5.0.post1
-flask
+flask==2.1.2
 Werkzeug==2.1.2
-gunicorn
+gunicorn==21.2.0
