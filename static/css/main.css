@@ -106,6 +106,7 @@ display: block;
 
 /* PRIVACY */
 .privacy-container {
+    width: 80%;
     align-self: center;
     flex-grow: 1;
     line-height: 30px;
@@ -114,5 +115,19 @@ display: block;
     .policy-title {
         text-align: center;
         margin-bottom: 60px;
+    }
+}
+
+/* ABOUT */
+.about-container {
+    width: 80%;
+    align-self: center;
+    flex-grow: 1;
+    margin-top: 60px;
+    line-height: 30px;
+
+    h2 {
+        text-align: center;
+        margin-bottom: 25px;
     }
 }

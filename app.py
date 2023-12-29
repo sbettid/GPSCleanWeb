@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request
 from werkzeug.utils import secure_filename
 from gpsclean.main import main as gpsclean_main
+from gpsclean._version import __version__ as gpsclean_version
 import tempfile
 import os
 import sys
@@ -85,3 +86,8 @@ def correct_trace():
 @app.route("/privacy", methods=['GET'])
 def privacy():
     return render_template('privacy.html')
+
+@app.route("/about", methods=['GET'])
+def about():
+
+    return render_template('about.html', gpsclean_version=gpsclean_version)
