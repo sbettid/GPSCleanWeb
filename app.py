@@ -58,8 +58,6 @@ def correct_trace():
     # save trace file to temporary folder, using uuid + filename
     trace_file.save(original_trace_filepath)
 
-    print(f"File saved in {original_trace_filepath}")
-
     # correct the trace using GPSClean package
     gpsclean_main([original_trace_filepath])
 
@@ -83,3 +81,7 @@ def correct_trace():
     original_trace_name = os.path.splitext(original_trace_filepath)[0].rsplit("/", 1)[-1]
 
     return render_template('correct_trace.html', corrected_trace=corrected_trace, original_trace=original_trace, original_trace_name=original_trace_name, test_trace=False)
+
+@app.route("/privacy", methods=['GET'])
+def privacy():
+    return render_template('privacy.html')
