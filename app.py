@@ -3,6 +3,7 @@ from werkzeug.utils import secure_filename
 from gpsclean.main import main as gpsclean_main
 import tempfile
 import os
+import sys
 
 __name__ = 'GPSClean'
 TEST_TRACES_PATH = "./test_traces"
@@ -82,4 +83,3 @@ def correct_trace():
     original_trace_name = os.path.splitext(original_trace_filepath)[0].rsplit("/", 1)[-1]
 
     return render_template('correct_trace.html', corrected_trace=corrected_trace, original_trace=original_trace, original_trace_name=original_trace_name, test_trace=False)
-    
