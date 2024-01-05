@@ -42,3 +42,8 @@ jobs:
           context: .
           push: true
           tags: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:latest
+
+      - name: Trigger deploy on Render
+        uses: distributhor/workflow-webhook@v3
+        with:
+          webhook_url: ${{ secrets.RENDER_WEBHOOK }}
